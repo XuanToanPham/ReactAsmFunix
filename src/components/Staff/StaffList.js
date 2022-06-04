@@ -1,14 +1,24 @@
-import classes from "./StaffList.module.css"
+import classes from "./StaffList.module.css";
+import { useRef } from "react";
 const StaffList = (props) => {
-  const staffs = props.staffs;
+  const staffItem = useRef();
+  const staff = props.staff;
+  const clickStaffItemHandler = () => {
+    props.onClick(staffItem.current);
+  };
   return (
-    <ul className="row p-0">
-      {staffs.map(staff => (
-          <li className={`col-6 ${classes["staff-item"]}`} key={staff.id}>
-              <p className={`p-2 ${classes["staff-content"]}`}>{staff.name}</p>
-          </li>
-      ))}
-    </ul>
+    <li
+      ref={staffItem}
+      className={`col-6 ${classes["staff-item"]}`}
+      id={staff.id}
+    >
+      <p
+        className={`p-2 ${classes["staff-content"]}`}
+        onClick={clickStaffItemHandler}
+      >
+        {staff.name}
+      </p>
+    </li>
   );
 };
 
