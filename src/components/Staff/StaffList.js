@@ -4,7 +4,7 @@ const StaffList = (props) => {
   const staffItem = useRef();
   const staff = props.staff;
   const clickStaffItemHandler = () => {
-    props.onClick(staffItem.current);
+    props.onClick(+staffItem.current.id);
   };
   return (
     <li
