@@ -3,19 +3,26 @@ import StaffList from "./StaffList";
 import { STAFFS } from "../Data/staffs";
 import { Fragment, useState } from "react";
 import StaffDetail from "./StaffDetail";
+import ColumnForm from "./ColumnForm";
 const Staff = () => {
   const [infoStaff, setInfoStaff] = useState(null);
+  const [col, setCol] = useState("6");
   const clickHandler = (id) => {
     const staffInfo = STAFFS.find(staff => staff.id === id);
     setInfoStaff(staffInfo);
   }
+
+  const getColumn = (col) =>{
+    setCol(col);
+  }
   console.log(infoStaff)
   return (
     <Fragment>
+      <ColumnForm onClick={getColumn}/>
       <Container className="mt-2">
         <ul className="row p-0">
           {STAFFS.map((staff) => (
-            <StaffList staff={staff} key={staff.id} onClick={clickHandler} />
+            <StaffList col={col} staff={staff} key={staff.id} onClick={clickHandler} />
           ))}
         </ul>
         {!infoStaff && <p>Bấm vào tên nhân viên để hiện thông tin</p>}

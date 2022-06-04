@@ -1,9 +1,9 @@
 
 import Container from "react-bootstrap/esm/Container";
 
-const ColumnForm = () => {
+const ColumnForm = (props) => {
   const submitHandler = (event) => {
-    console.log(event.target.value);
+    props.onClick(event.target.value);
   };
   return (
     <Container>

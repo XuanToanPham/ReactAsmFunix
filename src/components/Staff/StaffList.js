@@ -3,13 +3,14 @@ import { useRef } from "react";
 const StaffList = (props) => {
   const staffItem = useRef();
   const staff = props.staff;
+  const col = props.col;
   const clickStaffItemHandler = () => {
     props.onClick(+staffItem.current.id);
   };
   return (
     <li
       ref={staffItem}
-      className={`col-3 col-lg-2 ${classes["staff-item"]}`}
+      className={`col-3 col-lg-${12/col} ${classes["staff-item"]}`}
       id={staff.id}
     >
       <p
