@@ -13,20 +13,20 @@ const StaffDetail = (props) => {
     props.onClick(null)
   }
   return (
-    <div className={`col-6`}>
+    <div className={`col-12`}>
       <div className={classes["staff-container"]}>
-        <button className={classes["staff-button"]} onClick={clickExitHandler}>
+        <button className={classes["staff-button"]} onClick={clickExitHandler} style={{color: "#EF3A3A"}}>
           <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
         </button>
         <div className={`p-2`}>
-          <h3>Họ và tên:{infoStaff.name}</h3>
+          <h3>Họ và tên: {infoStaff.name}</h3>
           <p>Ngày sinh: {dateFormat(infoStaff.doB, "dd/mm/yyyy")}</p>
           <p>
             Ngày vào công ty: {dateFormat(infoStaff.startDate, "dd/mm/yyyy")}
           </p>
           <p>Phòng ban: {infoStaff.department.name}</p>
-          <p>Số ngày nghĩ còn lại: {infoStaff.annualLeave}</p>
-          <p>Số ngày đã làm thêm: {infoStaff.overTime}</p>
+          <p>Số ngày nghĩ còn lại: <span  style={{color: "#EF3A3A"}}>{infoStaff.annualLeave}</span> </p>
+          <p>Số ngày đã làm thêm:<span  style={{color: "#3DA822"}}>{infoStaff.overTime}</span></p>
         </div>
       </div>
     </div>
