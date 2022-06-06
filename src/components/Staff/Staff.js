@@ -27,7 +27,7 @@ const Staff = () => {
         </ul>
         {!infoStaff && <p>Bấm vào tên nhân viên để hiện thông tin</p>}
       </Container>
-      <Container>
+      <Container className="mb-2">
         <div className="row p-0">
           {infoStaff && <StaffDetail infoStaff={infoStaff} />}
         </div>

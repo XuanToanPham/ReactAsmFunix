@@ -10,7 +10,7 @@ const StaffList = (props) => {
   return (
     <li
       ref={staffItem}
-      className={`col-3 col-lg-${12/col} ${classes["staff-item"]}`}
+      className={`col-${col!=="6"? 12/col : 4} col-lg-${12/col} ${classes["staff-item"]}`}
       id={staff.id}
     >
       <p

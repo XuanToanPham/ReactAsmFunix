@@ -8,7 +8,7 @@ const ColumnForm = (props) => {
   return (
     <Container>
       <div className="row justify-content-end">
-        <form  className="col-3" >
+        <form  className="col-lg-3 col-12" >
           <label className="form-lable" htmlFor="column-list-staff">
             Chọn số cột hiển thị danh sách
           </label>
@@ -18,7 +18,7 @@ const ColumnForm = (props) => {
             <option value={2}>2</option>
             <option value={3}>3</option>
             <option value={4}>4</option>
-            <option value={6}>6</option>
+            <option className="d-none d-lg-block" value={6}>6</option>
           </select>
         </form>
       </div>
