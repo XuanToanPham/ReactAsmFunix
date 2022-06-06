@@ -1,5 +1,5 @@
 import classes from "./StaffDetail.module.css";
-import dateFormat, { masks } from "dateformat"
+import dateFormat from "dateformat"
 const StaffDetail = (props) => {
     const infoStaff = props.infoStaff;
   return (
