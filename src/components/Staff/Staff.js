@@ -15,7 +15,9 @@ const Staff = () => {
   const getColumn = (col) =>{
     setCol(col);
   }
-  console.log(infoStaff)
+  const exitStaffDetail = (isExit)=>{
+    setInfoStaff(isExit)
+  }
   return (
     <Fragment>
       <ColumnForm onClick={getColumn}/>
@@ -29,7 +31,7 @@ const Staff = () => {
       </Container>
       <Container className="mb-2">
         <div className="row p-0">
-          {infoStaff && <StaffDetail infoStaff={infoStaff} />}
+          {infoStaff && <StaffDetail infoStaff={infoStaff} onClick={exitStaffDetail}/>}
         </div>
       </Container>
     </Fragment>
