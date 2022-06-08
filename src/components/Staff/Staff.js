@@ -42,18 +42,6 @@ const Staff = () => {
           </p>
         )}
       </Container>
-      <Container className="mb-2">
-        {infoStaff && (
-          <p className="fs-5 fw-bold">
-            Thông tin nhân sự
-          </p>
-        )}
-        <div className="row p-0">
-          {infoStaff && (
-            <StaffDetail infoStaff={infoStaff} onClick={exitStaffDetail} />
-          )}
-        </div>
-      </Container>
     </Fragment>
   );
 };

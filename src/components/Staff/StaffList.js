@@ -1,6 +1,7 @@
 import classes from "./StaffList.module.css";
 
 import { useRef } from "react";
+import { NavLink } from "react-router-dom";
 const StaffList = (props) => {
   const staffItem = useRef();
   const staff = props.staff;
@@ -18,10 +19,12 @@ const StaffList = (props) => {
       id={staff.id}
       onClick={clickStaffItemHandler}
     >
-      <div className={`p-2 ${classes["staff-content"]}`}>
-        <img src={require(`${image}`)} className="img-fluid" alt="Staff" />
-        <p className="m-0 mt-2">{staff.name}</p>
-      </div>
+      <NavLink className="text-decoration-none" to={`/staffList/${staff.id}`}>
+        <div className={`p-2 ${classes["staff-content"]}`}>
+          <img src={require(`${image}`)} className="img-fluid" alt="Staff" />
+          <p className="m-0 mt-2">{staff.name}</p>
+        </div>
+      </NavLink>
     </li>
   );
 };
