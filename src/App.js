@@ -1,15 +1,17 @@
-import './App.css';
-import Header from './components/UI/Header'
-import "bootstrap/dist/css/bootstrap.min.css"
-import Staff from './components/Staff/Staff';
+import "./App.css";
+import { BrowserRouter, Route } from "react-router-dom";
+import Header from "./components/UI/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Staff from "./components/Staff/Staff";
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      
-      <Staff/>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Route path="/staffList">
+        <Staff />
+      </Route>
+    </BrowserRouter>
   );
 }
 
