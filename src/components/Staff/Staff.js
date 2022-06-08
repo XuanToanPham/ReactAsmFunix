@@ -12,6 +12,7 @@ const Staff = () => {
     setInfoStaff(staffInfo);
   };
 
+
   const getColumn = (col) => {
     setCol(col);
   };
@@ -29,6 +30,7 @@ const Staff = () => {
             <StaffList
               col={col}
               staff={staff}
+              imageStaff = {staff.image}
               key={staff.id}
               onClick={clickHandler}
             />
