@@ -10,10 +10,34 @@
     line-height: 1px;
     padding: 0;
     color: black;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .social-item{
     padding: 10px 12px;
     display: inline;
+    padding: 10px 14px;
+    border-radius: 15px;
 }
+
+.social-item a{
+    color: white;
+}
+
+.facebook{
+    background-color: #365ca3;
+    
+}
+
+.google{
+    background-color: rgb(232, 79, 79);
+}
+
+.linkin{
+    background-color: #2b60c3;
+}
+
+.youtube{
+    background-color: rgb(228, 40, 40);
+}
+

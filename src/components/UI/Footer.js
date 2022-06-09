@@ -10,7 +10,11 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faPhone,
+  faBlenderPhone,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 fontawesome.library.add(
   faFacebookF,
@@ -19,11 +23,12 @@ fontawesome.library.add(
   faTwitterSquare,
   faYoutube,
   faEnvelope,
-  faPhone
+  faPhone,
+  faBlenderPhone,
 );
 const Footer = () => {
   return (
-    <footer className={`mt-4 ${classes.footer}`}>
+    <footer className={`pt-4 pb-4 ${classes.footer}`}>
       <Container className="">
         <div className="row justify-content-center align-items-center">
           <div className="col-6">
@@ -32,33 +37,36 @@ const Footer = () => {
             <p>
               <FontAwesomeIcon icon="fa-solid fa-phone" /> +852 1234 5678
             </p>
-            <p>+852 8765 4321</p>
-            <p>confusuin@food.net</p>
+            <p>
+              <FontAwesomeIcon icon="fa-solid fa-blender-phone" />
+              +852 8765 4321
+            </p>
+            <p> <FontAwesomeIcon icon="fa-solid fa-envelope" />confusuin@food.net</p>
           </div>
 
           <div className="col-6">
             <ul className={classes["footer-social-network"]}>
-              <li className={classes["social-item"]}>
+              <li className={`${classes["social-item"]} ${classes.facebook}`}>
                 <Link className={classes["social-link"]}>
                   <FontAwesomeIcon icon="fa-brands fa-facebook-f" />
                 </Link>
               </li>
-              <li className={classes["social-item"]}>
+              <li className={`${classes["social-item"]} ${classes.google}`}>
                 <Link className={classes["social-link"]}>
                   <FontAwesomeIcon icon="fa-brands fa-google-plus-g" />
                 </Link>
               </li>
-              <li className={classes["social-item"]}>
+              <li className={`${classes["social-item"]} ${classes.linkin}`}>
                 <Link className={classes["social-link"]}>
                   <FontAwesomeIcon icon="fa-brands fa-linkedin-in" />
                 </Link>
               </li>
-              <li className={classes["social-item"]}>
+              <li className={`${classes["social-item"]} ${classes.youtube}`}>
                 <Link className={classes["social-link"]}>
                   <FontAwesomeIcon icon="fa-brands fa-youtube" />
                 </Link>
               </li>
-              <li className={classes["social-item"]}>
+              <li className={`${classes["social-item"]} ${classes.facebook}`}>
                 <Link className={classes["social-link"]}>
                   <FontAwesomeIcon icon="fa-solid fa-envelope" />
                 </Link>
