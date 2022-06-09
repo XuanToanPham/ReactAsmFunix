@@ -1,0 +1,19 @@
+.footer{
+    background-color: #3e73d5;
+}
+
+.footer-social-network{
+    display: flex;
+    list-style: none;
+}
+.social-link{
+    line-height: 1px;
+    padding: 0;
+    color: black;
+    font-size: 2rem;
+}
+
+.social-item{
+    padding: 10px 12px;
+    display: inline;
+}

@@ -9,7 +9,7 @@ const Header = () => {
 
   console.log(location);
   return (
-    <header className={`p-3 ${classes.header}`}>
+    <header className={`ps-3 pe-3 ${classes.header}`}>
       <Nav/>
     </header>
   );

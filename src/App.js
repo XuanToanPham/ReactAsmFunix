@@ -4,6 +4,7 @@ import Header from "./components/UI/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Staff from "./components/Staff/Staff";
 import StaffDetail from "./components/Staff/StaffDetail";
+import Footer from "./components/UI/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <StaffDetail />
         </Route>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 }

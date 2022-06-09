@@ -12,7 +12,7 @@ const StaffDetail = () => {
   const idStaff = +params.staffId;
   const infoStaff = STAFFS.find((staff) => staff.id === idStaff);
   return (
-    <div>
+    <div className="p-4">
       <div className={classes["staff-container"]}>
         <NavLink
           className={classes["staff-button"]}
