@@ -4,7 +4,7 @@ import DepartmentList from "./DepartmentList";
 const Department = () =>{
     return (
         <Container>
-            <ul className="row">
+            <ul className="row mb-5 mt-5">
                 {DEPARTMENTS.map(department => (
                     <DepartmentList department={department} key={department.id}/>
                 ))}
