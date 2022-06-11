@@ -5,6 +5,7 @@
 .footer-social-network{
     display: flex;
     list-style: none;
+    justify-content: center
 }
 .social-link{
     line-height: 1px;

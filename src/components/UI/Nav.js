@@ -41,7 +41,7 @@ const Nav = () => {
                 <NavLink
                   className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
                   aria-current="page"
-                  to="/staffList"
+                  to="/payrollList"
                 >
                   Nhân Sự
                 </NavLink>
