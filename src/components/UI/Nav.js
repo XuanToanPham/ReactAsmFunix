@@ -3,22 +3,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, Redirect } from "react-router-dom";
 import classes from "./Nav.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {STAFFS} from "../Data/staffs"
 fontawesome.library.add(faUser);
-const Nav = () => {
+const Nav = (props) => {
   const [isRedirect, setIsRedirect] = useState(null);
   const inputSearch = useRef();
   const searchHandler = (e) =>{
     e.preventDefault();
+    console.log(1);
     const data = inputSearch.current.value;
-    const infoStaff = STAFFS.find(staff => staff.name === data);
-    if(infoStaff){
-      setIsRedirect(`/staffList/${infoStaff.id}`)
-    }else{
+    const infoStaff = STAFFS.filter(staff => staff.name.includes(data));
+    if(infoStaff.length > 1){
+      props.onSearch(infoStaff);
+      setIsRedirect(`/listSearch`)
+      setIsRedirect(null)
+    }
+    else if (infoStaff.length === 1) {
+      setIsRedirect(`/staffList/${infoStaff[0].id}`)
+    }
+    else{
       setIsRedirect(`/notFoundStaff`)
     }
   } 
+
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid d-block">

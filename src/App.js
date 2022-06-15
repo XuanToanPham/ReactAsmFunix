@@ -4,7 +4,6 @@ import {
   Redirect,
   Route,
   Switch,
-  useLocation,
 } from "react-router-dom";
 import Header from "./components/UI/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,16 +15,19 @@ import Department from "./components/Department/Department";
 import Breadcrum from "./components/Breadcrumb/Breadcrum";
 import { useState } from "react";
 import NotFoundStaff from "./components/UI/NotFoundStaff";
+import ListSearch from "./components/UI/ListSearch";
 function App() {
-  const location = useLocation();
-  console.log(location);
   const [infoStaff, setInfoStaff] = useState("");
+  const [listStaffSearch, setListStaffSearch ] = useState([]);
   const getInfoStaff = (infoStaff) => {
     setInfoStaff(infoStaff);
   };
+  const getListSearch = (listSearch) =>{
+    setListStaffSearch(listSearch)
+  }
   return (
     <BrowserRouter>
-      <Header />
+      <Header onSearch ={getListSearch} />
       <Breadcrum infoStaff={infoStaff} />
       <Switch>
         <Route path={`/`} exact>
@@ -47,6 +49,9 @@ function App() {
         </Route>
         <Route path={`/departmentList`}>
           <Department />
+        </Route>
+        <Route path={`/listSearch`}>
+          <ListSearch listSearch = {listStaffSearch} />
         </Route>
       </Switch>
       <Footer />

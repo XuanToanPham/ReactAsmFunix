@@ -3,8 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 const Breadcrum = (props) => {
   const location = useLocation();
   let infoStaffDetail = props.infoStaff.name;
-  console.log(infoStaffDetail);
-  console.log(location.pathname.includes("staffList/"));
   let content;
   if (location.pathname.includes("payrollList")) {
     content = "Bang luong";
