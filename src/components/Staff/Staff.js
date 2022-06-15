@@ -2,7 +2,6 @@ import Container from "react-bootstrap/esm/Container";
 import StaffList from "./StaffList";
 import { STAFFS } from "../Data/staffs";
 import { Fragment, useState } from "react";
-import StaffDetail from "./StaffDetail";
 import ColumnForm from "./ColumnForm";
 const Staff = () => {
   const [infoStaff, setInfoStaff] = useState(null);
@@ -10,14 +9,12 @@ const Staff = () => {
   const clickHandler = (id) => {
     const staffInfo = STAFFS.find((staff) => staff.id === id);
     setInfoStaff(staffInfo);
+
   };
 
 
   const getColumn = (col) => {
     setCol(col);
-  };
-  const exitStaffDetail = (isExit) => {
-    setInfoStaff(isExit);
   };
   return (
     <Fragment>

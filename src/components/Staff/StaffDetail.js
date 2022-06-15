@@ -3,14 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import classes from "./StaffDetail.module.css";
 import dateFormat from "dateformat";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { STAFFS } from "../Data/staffs";
+import { useEffect } from "react";
 fontawesome.library.add(faArrowRightFromBracket);
-const StaffDetail = () => {
-  
+const StaffDetail = (props) => {
   const params = useParams();
   const idStaff = +params.staffId;
   const infoStaff = STAFFS.find((staff) => staff.id === idStaff);
+  useEffect(() =>{
+    props.infoStaff(infoStaff);
+  }, [infoStaff, props]);
   return (
     <div className="p-5">
       <div className={classes["staff-container"]}>
@@ -18,11 +21,12 @@ const StaffDetail = () => {
           className={classes["staff-button"]}
           style={{ color: "#EF3A3A" }}
           to="/staffList"
+          
         >
           <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
         </NavLink>
         <div className={`row p-2`}>
-          <img src={require(`${infoStaff.image}`)} className="col-3 img-fluid"/>
+          <img src={require(`${infoStaff.image}`)} className="col-3 img-fluid" alt="staff"/>
           <div className="col-lg-9">
             <h3>Họ và tên: {infoStaff.name}</h3>
             <p>Ngày sinh: {dateFormat(infoStaff.doB, "dd/mm/yyyy")}</p>

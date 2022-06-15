@@ -47,27 +47,27 @@ const Footer = () => {
           <div className="col-6">
             <ul className={classes["footer-social-network"]}>
               <li className={`${classes["social-item"]} ${classes.facebook}`}>
-                <Link className={classes["social-link"]}>
+                <Link className={classes["social-link"]} to="/">
                   <FontAwesomeIcon icon="fa-brands fa-facebook-f" />
                 </Link>
               </li>
               <li className={`${classes["social-item"]} ${classes.google}`}>
-                <Link className={classes["social-link"]}>
+                <Link className={classes["social-link"]} to="/">
                   <FontAwesomeIcon icon="fa-brands fa-google-plus-g" />
                 </Link>
               </li>
               <li className={`${classes["social-item"]} ${classes.linkin}`}>
-                <Link className={classes["social-link"]}>
+                <Link className={classes["social-link"]} to="/">
                   <FontAwesomeIcon icon="fa-brands fa-linkedin-in" />
                 </Link>
               </li>
               <li className={`${classes["social-item"]} ${classes.youtube}`}>
-                <Link className={classes["social-link"]}>
+                <Link className={classes["social-link"]} to="/">
                   <FontAwesomeIcon icon="fa-brands fa-youtube" />
                 </Link>
               </li>
               <li className={`${classes["social-item"]} ${classes.facebook}`}>
-                <Link className={classes["social-link"]}>
+                <Link className={classes["social-link"]} to="/">
                   <FontAwesomeIcon icon="fa-solid fa-envelope" />
                 </Link>
               </li>

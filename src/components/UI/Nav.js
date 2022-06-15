@@ -1,11 +1,24 @@
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, Redirect } from "react-router-dom";
 import classes from "./Nav.module.css";
+import { useRef, useState } from "react";
+import {STAFFS} from "../Data/staffs"
 fontawesome.library.add(faUser);
 const Nav = () => {
+  const [isRedirect, setIsRedirect] = useState(null);
+  const inputSearch = useRef();
+  const searchHandler = (e) =>{
+    e.preventDefault();
+    const data = inputSearch.current.value;
+    const infoStaff = STAFFS.find(staff => staff.name === data);
+    if(infoStaff){
+      setIsRedirect(`/staffList/${infoStaff.id}`)
+    }else{
+      setIsRedirect(`/notFoundStaff`)
+    }
+  } 
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid d-block">
@@ -43,33 +56,35 @@ const Nav = () => {
                   aria-current="page"
                   to="/payrollList"
                 >
-                  Nhân Sự
+                  Bảng Lương
                 </NavLink>
               </li>
               <li className={`nav-item`}>
                 <NavLink
                   className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
                   aria-current="page"
-                  to="/staffList"
+                  to="/departmentList"
                 >
-                  Nhân Sự
+                  Phòng ban
                 </NavLink>
               </li>
             </ul>
-            <form className="d-flex">
+            <form className="d-flex" onSubmit={searchHandler}>
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                ref={inputSearch}
               />
-              <button className="btn btn-outline-success" type="submit">
+              <button className="btn btn-outline-success" type="submit" >
                 Search
               </button>
             </form>
           </div>
         </nav>
       </div>
+      {isRedirect?<Redirect to={isRedirect}/>: ""}
     </nav>
   );
 };
