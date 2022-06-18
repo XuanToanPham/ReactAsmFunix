@@ -22,12 +22,9 @@ function App() {
   const getInfoStaff = (infoStaff) => {
     setInfoStaff(infoStaff);
   };
-  const getListSearch = (listSearch) =>{
-    setListStaffSearch(listSearch)
-  }
   return (
     <BrowserRouter>
-      <Header onSearch ={getListSearch} />
+      <Header />
       <Breadcrum infoStaff={infoStaff} />
       <Switch>
         <Route path={`/`} exact>
@@ -51,7 +48,7 @@ function App() {
           <Department />
         </Route>
         <Route path={`/listSearch`}>
-          <ListSearch listSearch = {listStaffSearch} />
+          <ListSearch />
         </Route>
       </Switch>
       <Footer />
