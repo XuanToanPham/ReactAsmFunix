@@ -1,9 +1,9 @@
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import classes from "./Nav.module.css";
-import { useRef, useState } from "react";
+import { useRef} from "react";
 import { STAFFS } from "../Data/staffs";
 fontawesome.library.add(faUser);
 const Nav = () => {
@@ -13,20 +13,21 @@ const Nav = () => {
     e.preventDefault();
     const data = inputSearch.current.value;
     let infoStaff;
-    if (data != "") {
-      infoStaff = STAFFS.filter((staff) => staff.name.includes(data));
-    }
-    if (infoStaff.length > 1) {
-      history.push({
-        pathname: "/listSearch",
-        state: {
-          listSearch: infoStaff,
-        },
-      });
-    } else if (infoStaff.length === 1) {
-      history.push(`/staffList/${infoStaff[0].id}`);
-    } else {
-      history.push("/notFoundStaff");
+    if (data !== "") {
+      infoStaff = STAFFS.filter((staff) => staff.name.toLowerCase().includes(data.toLowerCase()));
+      console.log(infoStaff)
+      if (infoStaff.length > 1) {
+        history.push({
+          pathname: "/listSearch",
+          state: {
+            listSearch: infoStaff,
+          },
+        });
+      } else if (infoStaff.length === 1) {
+        history.push(`/staffList/${infoStaff[0].id}`);
+      } else {
+        history.push("/notFoundStaff");
+      }
     }
   };
 
