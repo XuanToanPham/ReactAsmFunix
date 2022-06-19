@@ -1,6 +1,6 @@
 import Container from "react-bootstrap/esm/Container";
 import classes from "./ListSearch.module.css";
-import { useCallback, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 const ListSearch = () => {
   const staffItem = useRef();
