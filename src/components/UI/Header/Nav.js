@@ -4,7 +4,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useHistory } from "react-router-dom";
 import classes from "./Nav.module.css";
 import { useRef} from "react";
-import { STAFFS } from "../Data/staffs";
+import { STAFFS } from "../../Data/staffs";
 fontawesome.library.add(faUser);
 const Nav = () => {
   const inputSearch = useRef();

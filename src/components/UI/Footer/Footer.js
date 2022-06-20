@@ -31,7 +31,7 @@ const Footer = () => {
     <footer className={`pt-4 pb-4 ${classes.footer}`}>
       <Container className="">
         <div className="row justify-content-center align-items-center">
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <h3>Our Address</h3>
             <p>121, Clear Water Bay Road Clear Water Bay, Kowloon Hong Kong</p>
             <p>
@@ -44,7 +44,7 @@ const Footer = () => {
             <p> <FontAwesomeIcon icon="fa-solid fa-envelope" />confusuin@food.net</p>
           </div>
 
-          <div className="col-6">
+          <div className="col-12 col-lg-6">
             <ul className={classes["footer-social-network"]}>
               <li className={`${classes["social-item"]} ${classes.facebook}`}>
                 <Link className={classes["social-link"]} to="/">

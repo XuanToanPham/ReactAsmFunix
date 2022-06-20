@@ -18,7 +18,7 @@ const ListSearch = () => {
         {staff.map((staff) => (
           <li
             ref={staffItem}
-            className={`col-6 col-lg-3 ${classes["staff-item"]}`}
+            className={`col-lg-3 col-md-4 col-6 ${classes["staff-item"]}`}
             id={staff.id}
             onClick={clickStaffItemHandler}
             key={staff.id}

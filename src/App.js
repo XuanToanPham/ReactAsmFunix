@@ -5,17 +5,18 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import Header from "./components/UI/Header";
+import Header from "./components/UI/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Staff from "./components/Staff/Staff";
 import StaffDetail from "./components/Staff/StaffDetail";
-import Footer from "./components/UI/Footer";
+import Footer from "./components/UI/Footer/Footer";
 import Payroll from "./components/Payroll/Payroll";
 import Department from "./components/Department/Department";
 import Breadcrum from "./components/Breadcrumb/Breadcrum";
 import { useState } from "react";
-import NotFoundStaff from "./components/UI/NotFoundStaff";
-import ListSearch from "./components/UI/ListSearch";
+import NotFoundStaff from "./components/UI/Search/NotFoundStaff";
+import ListSearch from "./components/UI/Search/ListSearch";
+import FromAdd from "./components/UI/Form/FormAdd";
 function App() {
   const [infoStaff, setInfoStaff] = useState("");
   const getInfoStaff = (infoStaff) => {
@@ -23,6 +24,7 @@ function App() {
   };
   return (
     <BrowserRouter>
+      <FromAdd/>
       <Header />
       <Breadcrum infoStaff={infoStaff} />
       <Switch>

@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 const StaffList = (props) => {
   const staffItem = useRef();
   const staff = props.staff;
-  const col = props.col;
   const clickStaffItemHandler = () => {
     props.onClick(+staffItem.current.id);
   };
@@ -13,7 +12,7 @@ const StaffList = (props) => {
   return (
     <li
       ref={staffItem}
-      className={`col-${col !== "6" ? 12 / col : 4} col-lg-${12 / col} ${
+      className={`col-lg-2 col-md-4 col-6 ${
         classes["staff-item"]
       }`}
       id={staff.id}

@@ -26,8 +26,8 @@ const StaffDetail = (props) => {
           <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
         </NavLink>
         <div className={`row p-2`}>
-          <img src={require(`${infoStaff.image}`)} className="col-3 img-fluid" alt="staff"/>
-          <div className="col-lg-9">
+          <img src={require(`${infoStaff.image}`)} className="col-lg-3 col-12 col-md-4 img-fluid" alt="staff"/>
+          <div className="col-lg-9 col-12 col-md-8">
             <h3>Họ và tên: {infoStaff.name}</h3>
             <p>Ngày sinh: {dateFormat(infoStaff.doB, "dd/mm/yyyy")}</p>
             <p>
