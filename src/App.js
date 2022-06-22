@@ -17,14 +17,23 @@ import { useState } from "react";
 import NotFoundStaff from "./components/UI/Search/NotFoundStaff";
 import ListSearch from "./components/UI/Search/ListSearch";
 import FromAdd from "./components/UI/Form/FormAdd";
+import FormAdd from "./components/UI/Form/FormAdd";
 function App() {
   const [infoStaff, setInfoStaff] = useState("");
   const getInfoStaff = (infoStaff) => {
     setInfoStaff(infoStaff);
   };
+  const [showModal, setShowModal] = useState(false);
+  const showModalFormAdd = () =>{
+    setShowModal(true);
+  }
+
+  const hideModalFormAdd =() =>{
+    setShowModal(false)
+  }
   return (
     <BrowserRouter>
-      <FromAdd/>
+      {showModal && <FormAdd onClose={hideModalFormAdd}/>}
       <Header />
       <Breadcrum infoStaff={infoStaff} />
       <Switch>
@@ -32,7 +41,7 @@ function App() {
           <Redirect to={`/staffList`} />
         </Route>
         <Route path="/staffList" exact>
-          <Staff />
+          <Staff onShow={showModalFormAdd} />
         </Route>
         <Route path="/staffList/:staffId">
           <StaffDetail infoStaff={getInfoStaff} />

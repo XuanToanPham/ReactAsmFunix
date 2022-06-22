@@ -1,12 +1,19 @@
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faList } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useHistory } from "react-router-dom";
 import classes from "./Nav.module.css";
-import { useRef} from "react";
+import { useRef, useState } from "react";
 import { STAFFS } from "../../Data/staffs";
-fontawesome.library.add(faUser);
+fontawesome.library.add(faUser, faList);
 const Nav = () => {
+  let showNav = false;
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
+  const clickButtonShowNav = () => {
+    showNav = !showNav;
+  };
   const inputSearch = useRef();
   const history = useHistory();
   const searchHandler = (e) => {
@@ -14,8 +21,10 @@ const Nav = () => {
     const data = inputSearch.current.value;
     let infoStaff;
     if (data !== "") {
-      infoStaff = STAFFS.filter((staff) => staff.name.toLowerCase().includes(data.toLowerCase()));
-      console.log(infoStaff)
+      infoStaff = STAFFS.filter((staff) =>
+        staff.name.toLowerCase().includes(data.toLowerCase())
+      );
+      console.log(infoStaff);
       if (infoStaff.length > 1) {
         history.push({
           pathname: "/listSearch",
@@ -33,68 +42,67 @@ const Nav = () => {
 
   return (
     <nav className="navbar navbar-expand-lg">
-      <div className="container-fluid d-block">
-        <nav className="navbar">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <NavLink className="navbar-brand" to="/staffList">
-              <span className={`${classes["header-content"]} col-4`}>
-                {<FontAwesomeIcon icon="fa-solid fa-user" />}
-              </span>
-            </NavLink>
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <NavLink
-                  className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
-                  aria-current="page"
-                  to="/staffList"
-                >
-                  Nhân Sự
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
-                  aria-current="page"
-                  to="/payrollList"
-                >
-                  Bảng Lương
-                </NavLink>
-              </li>
-              <li className={`nav-item`}>
-                <NavLink
-                  className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
-                  aria-current="page"
-                  to="/departmentList"
-                >
-                  Phòng ban
-                </NavLink>
-              </li>
-            </ul>
-            <form className="d-flex" onSubmit={searchHandler}>
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                ref={inputSearch}
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
-        </nav>
+      <div className="container-fluid">
+        <NavLink className="navbar-brand" to="/staffList">
+          <span className={`${classes["header-content"]} col-4`}>
+            {<FontAwesomeIcon icon="fa-solid fa-user" />}
+          </span>
+        </NavLink>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExample09"
+          aria-controls="navbarsExample09"
+          aria-expanded={!isNavCollapsed ? true : false}
+          aria-label="Toggle navigation"
+          onClick={handleNavCollapse}
+        >
+          <span className="navbar-toggler-icon">{<FontAwesomeIcon style={{"color": "white", "fontSize":"2rem"}} icon="fa-solid fa-list" />}</span>
+        </button>
+        <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarTogglerDemo01">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <NavLink
+                className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
+                aria-current="page"
+                to="/staffList"
+              >
+                Nhân Sự
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
+                aria-current="page"
+                to="/payrollList"
+              >
+                Bảng Lương
+              </NavLink>
+            </li>
+            <li className={`nav-item`}>
+              <NavLink
+                className={`nav-link fs-5 fw-bold ${classes["nav-link"]}`}
+                aria-current="page"
+                to="/departmentList"
+              >
+                Phòng ban
+              </NavLink>
+            </li>
+          </ul>
+          <form className="d-flex" onSubmit={searchHandler}>
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              ref={inputSearch}
+            />
+            <button className="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
       </div>
     </nav>
   );

@@ -2,7 +2,7 @@ import Modal from "../Modal/Modal";
 import Container from "react-bootstrap/esm/Container";
 import useInput from "../../../Hooks/use-input";
 import classes from "./FormAdd.module.css";
-const FormAdd = () => {
+const FormAdd = (props) => {
   const submitedHandler = (event) => {
     event.preventDefault();
   };
@@ -49,7 +49,10 @@ const FormAdd = () => {
     valueChangeHandler: salaryChangeHandler,
     inputBlurHandler: salaryBlurHandler,
     messageError: salaryMessageError,
-  } = useInput((value) => [{ error: "Requied", check: value.trim() !== "" }]);
+  } = useInput((value) => [
+    { error: "Requied", check: value.trim() !== "" },
+    { error: "Salary", check: +value.trim() <= 3 && +value.trim() >= 1 },
+  ]);
   const {
     value: enterLeave,
     isValid: enteredLeaveIsValid,
@@ -67,8 +70,21 @@ const FormAdd = () => {
     inputBlurHandler: overtimeBlurHandler,
     messageError: overtimeMessageError,
   } = useInput((value) => [{ error: "Requied", check: value.trim() !== "" }]);
+  let disabled = true;
+  if (
+    enteredNameIsValid &&
+    enteredDateIsValid &&
+    enteredDateStartIsValid &&
+    enteredDeparmentIsValid &&
+    enteredLeaveIsValid &&
+    enteredOvertimeIsValid &&
+    enteredSalaryIsValid
+  ) {
+    disabled = false;
+    console.log(disabled);
+  }
   return (
-    <Modal>
+    <Modal onClose={props.onClose}>
       <Container>
         <form onSubmit={submitedHandler}>
           <legend>Thêm nhân viên</legend>
@@ -79,7 +95,9 @@ const FormAdd = () => {
             <div className="col-9">
               <input
                 type={`text`}
-                className="form-control"
+                className={`form-control ${
+                  nameInputHasError ? classes.invalid : ""
+                }`}
                 id="name-input"
                 value={enterName}
                 onChange={nameChangeHandler}
@@ -97,7 +115,9 @@ const FormAdd = () => {
             <div className="col-9">
               <input
                 type={`date`}
-                className="form-control"
+                className={`form-control ${
+                  dateInputHasError ? classes.invalid : ""
+                }`}
                 id="date-birth-input"
                 onChange={dateChangeHandler}
                 onBlur={dateBlurHandler}
@@ -115,7 +135,9 @@ const FormAdd = () => {
             <div className="col-9">
               <input
                 type={`date`}
-                className="form-control"
+                className={`form-control ${
+                  dateStartInputHasError ? classes.invalid : ""
+                }`}
                 id="date-start-input"
                 onBlur={dateStartBlurHandler}
                 onChange={dateStartChangeHandler}
@@ -132,7 +154,9 @@ const FormAdd = () => {
             </label>
             <div className="col-9">
               <select
-                className="form-select"
+                className={`form-select ${
+                  deparmentInputHasError ? classes.invalid : ""
+                }`}
                 onBlur={deparmentBlurHandler}
                 onChange={deparmentChangeHandler}
                 value={enterDeparment}
@@ -156,10 +180,12 @@ const FormAdd = () => {
             <div className="col-9">
               <input
                 type={`number`}
-                className="form-control"
+                className={`form-control ${
+                  salaryInputHasError ? classes.invalid : ""
+                }`}
                 id="salaryScale-input"
                 min={`0`}
-                max = {`3.0`}
+                max={`3.0`}
                 placeholder="1.0 -> 3.0"
                 onChange={salaryChangeHandler}
                 onBlur={salaryBlurHandler}
@@ -177,15 +203,17 @@ const FormAdd = () => {
             <div className="col-9">
               <input
                 type={`number`}
-                className="form-control"
+                className={`form-control ${
+                  leaveInputHasError ? classes.invalid : ""
+                }`}
                 id="annualLeave-input"
                 min={`0`}
                 placeholder="1.0"
                 onBlur={leaveBlurHandler}
-                onChange= {leaveChangeHandler}
-                value = {enterLeave}
+                onChange={leaveChangeHandler}
+                value={enterLeave}
               />
-                {leaveInputHasError && (
+              {leaveInputHasError && (
                 <span className={classes.error}>{leaveMessageError}</span>
               )}
             </div>
@@ -197,26 +225,34 @@ const FormAdd = () => {
             <div className="col-9">
               <input
                 type={`number`}
-                className="form-control"
+                className={`form-control ${
+                  overtimeInputHasError ? classes.invalid : ""
+                }`}
                 id="overtime-input"
                 min={`1.0`}
                 placeholder="1.0"
                 onChange={overtimeChangeHandler}
-                onBlur = {overtimeBlurHandler}
-                value = {enterOvertime}
+                onBlur={overtimeBlurHandler}
+                value={enterOvertime}
               />
-               {overtimeInputHasError && (
+              {overtimeInputHasError && (
                 <span className={classes.error}>{overtimeMessageError}</span>
               )}
             </div>
           </div>
           <div className="mb-2 row">
-            <button className="btn btn-primary col-6" type="submit" disabled>
-              Thêm
-            </button>
-            <button className="btn btn-danger col-6" type="button">
+            <button className="btn btn-danger col-6" type="button" onClick={props.onClose}>
               Thoát
             </button>
+            {disabled ? (
+              <button className="btn btn-primary col-6" type="submit" disabled>
+                Thêm
+              </button>
+            ) : (
+              <button className="btn btn-primary col-6" type="submit">
+                Thêm
+              </button>
+            )}
           </div>
         </form>
       </Container>
