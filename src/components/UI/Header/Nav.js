@@ -4,16 +4,16 @@ import { faUser, faList } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useHistory } from "react-router-dom";
 import classes from "./Nav.module.css";
 import { useRef, useState } from "react";
-import { STAFFS } from "../../Data/staffs";
+
+import {useSelector} from "react-redux"
 fontawesome.library.add(faUser, faList);
 const Nav = () => {
-  let showNav = false;
+  const listStaff = useSelector((state) => state.addNewStaff.newStaff);
+
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
-  const clickButtonShowNav = () => {
-    showNav = !showNav;
-  };
+
   const inputSearch = useRef();
   const history = useHistory();
   const searchHandler = (e) => {
@@ -21,7 +21,7 @@ const Nav = () => {
     const data = inputSearch.current.value;
     let infoStaff;
     if (data !== "") {
-      infoStaff = STAFFS.filter((staff) =>
+      infoStaff = listStaff.filter((staff) =>
         staff.name.toLowerCase().includes(data.toLowerCase())
       );
       console.log(infoStaff);

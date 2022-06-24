@@ -4,13 +4,16 @@ import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import classes from "./StaffDetail.module.css";
 import dateFormat from "dateformat";
 import { NavLink, useParams } from "react-router-dom";
-import { STAFFS } from "../Data/staffs";
+
 import { useEffect } from "react";
+
+import {  useSelector } from "react-redux";
 fontawesome.library.add(faArrowRightFromBracket);
 const StaffDetail = (props) => {
+  const listStaff = useSelector((state) => state.addNewStaff.newStaff);
   const params = useParams();
   const idStaff = +params.staffId;
-  const infoStaff = STAFFS.find((staff) => staff.id === idStaff);
+  let infoStaff = listStaff.find((staff) => staff.id === idStaff);
   useEffect(() =>{
     props.infoStaff(infoStaff);
   }, [infoStaff, props]);

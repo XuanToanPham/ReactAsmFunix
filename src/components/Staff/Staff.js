@@ -5,8 +5,11 @@ import Container from "react-bootstrap/esm/Container";
 import StaffList from "./StaffList";
 import { STAFFS } from "../Data/staffs";
 import { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 fontawesome.library.add(faPlus);
 const Staff = (props) => {
+  const dispatch = useDispatch();
+  const listStaff = useSelector((state) => state.addNewStaff.newStaff);
   const [infoStaff, setInfoStaff] = useState(null);
   const clickHandler = (id) => {
     const staffInfo = STAFFS.find((staff) => staff.id === id);
@@ -21,7 +24,7 @@ const Staff = (props) => {
           <button onClick={props.onShow} className="btn btn-primary"><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
         </div>
         <ul className="row p-0">
-          {STAFFS.map((staff) => (
+          {listStaff.map((staff) => (
             <StaffList
               staff={staff}
               imageStaff={staff.image}
