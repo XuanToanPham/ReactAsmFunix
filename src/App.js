@@ -23,7 +23,7 @@ function App() {
   const getInfoStaff = (infoStaff) => {
     setInfoStaff(infoStaff);
   };
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const showModalFormAdd = () =>{
     setShowModal(true);
   }
