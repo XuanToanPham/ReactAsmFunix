@@ -1,5 +1,8 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import {STAFFS} from "../components/Data/staffs"
+import { staffs } from "../redux/reducer/staffReducer";
+import {checkAddStaff} from "../redux/reducer/staffReducer"
+import {department} from "../redux/reducer/departmentReducers"
 const intialStoreName = {
   isValidName: true,
   messageErrorName: "",
@@ -191,7 +194,9 @@ const store = configureStore({
     inputLeave: validateLeaveInput.reducer,
     inputOvertime: validateOvertimeInput.reducer,
     addNewStaff: addNewStaff.reducer,
-
+    staffs: staffs.reducer,
+    onCheckAdd : checkAddStaff.reducer,
+    department: department.reducer,
   },
 });
 export const inputNameAction = validateNameInput.actions;

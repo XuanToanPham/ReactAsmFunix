@@ -2,7 +2,8 @@ import Modal from "../Modal/Modal";
 import Container from "react-bootstrap/esm/Container";
 import classes from "./FormAdd.module.css";
 import { useDispatch, useSelector } from "react-redux";
-
+import {onCheckAddAction}from "../../../redux/reducer/staffReducer"
+import axios from "axios";
 import {
   inputNameAction,
   inputDateAction,
@@ -99,10 +100,20 @@ const FormAdd = (props) => {
         annualLeave: valueLeave,
         overTime: valueOvertime,
         salary: valueSalary * 300000 + valueOvertime * 2000000,
-        image: "./Image/NhanSu.jpg",
+        image: "/assets/images/alberto.png",
       };
+      const sendRequest = async () => {
+        await axios.post(
+          "https://rjs101xbackend.herokuapp.com/staffs",
+          newStaff
+        );
+        props.onClose();  
+      };
+      sendRequest();
+      dispatch(onCheckAddAction.susccessAdd(true));
       dispatch(addNewStaffAction.addNewStaff(newStaff));
-      props.onClose();
+      event.target.reset();
+     
     } else {
       if (valueName.trim() === "") {
         dispatch(inputNameAction.isValidName(""));
@@ -128,9 +139,6 @@ const FormAdd = (props) => {
       console.log(2);
     }
   };
-
-
-  //console.log(disabled && isFocus)
   return (
     <Modal onClose={props.onClose}>
       <Container>
@@ -147,7 +155,7 @@ const FormAdd = (props) => {
                   !isValidName ? classes.invalid : ""
                 } `}
                 id="name-input"
-                value={valueName}
+                
                 onChange={(event) => {
                   dispatch(inputNameAction.isValidName(event.target.value));
                 }}
@@ -171,7 +179,7 @@ const FormAdd = (props) => {
                   !isValidDate ? classes.invalid : ""
                 } `}
                 id="date-birth-input"
-                value={valueDate}
+                
                 onChange={(event) => {
                   dispatch(inputDateAction.isValidDate(event.target.value));
                 }}
@@ -205,7 +213,7 @@ const FormAdd = (props) => {
                     inputDateStartAction.isValidDateStart(event.target.value)
                   );
                 }}
-                value={valueDateStart}
+                
               />
               {!isValidDateStart && (
                 <span className={classes.error}>{errorMessageDateStart}</span>
@@ -231,7 +239,6 @@ const FormAdd = (props) => {
                     inputDepartmentAction.isValidDepartment(event.target.value)
                   );
                 }}
-                value={valueDepartment}
               >
                 <option value="">Chọn phòng ban</option>
                 <option value="Sale">Sale</option>
@@ -265,7 +272,6 @@ const FormAdd = (props) => {
                 onBlur={(event) => {
                   dispatch(inputSalaryAction.isValidSalary(event.target.value));
                 }}
-                value={valueSalary}
               />
               {!isValidSalary && (
                 <span className={classes.error}>{errorMessageSalary}</span>
@@ -291,7 +297,6 @@ const FormAdd = (props) => {
                 onBlur={(event) => {
                   dispatch(inputLeaveAction.isValidLeave(event.target.value));
                 }}
-                value={valueLeave}
               />
               {!isValidLeave && (
                 <span className={classes.error}>{errorMessageLeave}</span>
@@ -321,7 +326,6 @@ const FormAdd = (props) => {
                     inputOvertimeAction.isValidOvertime(event.target.value)
                   );
                 }}
-                value={valueOvertime}
               />
               {!isValidOvertime && (
                 <span className={classes.error}>{errorMessageOvertime}</span>

@@ -1,10 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/UI/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Staff from "./components/Staff/Staff";
@@ -13,27 +8,61 @@ import Footer from "./components/UI/Footer/Footer";
 import Payroll from "./components/Payroll/Payroll";
 import Department from "./components/Department/Department";
 import Breadcrum from "./components/Breadcrumb/Breadcrum";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NotFoundStaff from "./components/UI/Search/NotFoundStaff";
 import ListSearch from "./components/UI/Search/ListSearch";
-import FromAdd from "./components/UI/Form/FormAdd";
 import FormAdd from "./components/UI/Form/FormAdd";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { staffsAction,  } from "./redux/reducer/staffReducer";
+import { departmentAction  } from "./redux/reducer/departmentReducers";
+
+import { onCheckAddAction } from "./redux/reducer/staffReducer";
+import StaffDepartment from "./components/Department/StaffsDepartment"
 function App() {
+  let checkAddStaff = false;
+  const checkAdd = useSelector((state) => state.onCheckAdd.checkAdd)
+  checkAddStaff = checkAdd;
+  console.log(checkAddStaff);
+  const dispatch = useDispatch();
   const [infoStaff, setInfoStaff] = useState("");
   const getInfoStaff = (infoStaff) => {
     setInfoStaff(infoStaff);
   };
   const [showModal, setShowModal] = useState(false);
-  const showModalFormAdd = () =>{
+  const showModalFormAdd = () => {
     setShowModal(true);
-  }
+  };
 
-  const hideModalFormAdd =() =>{
-    setShowModal(false)
-  }
+  const hideModalFormAdd = () => {
+    setShowModal(false);
+  };
+  const fetchStaffs = async () => {
+    const response = await axios
+      .get("https://rjs101xbackend.herokuapp.com/")
+      .catch((err) => {
+        console.log("Error", err);
+      });
+    dispatch(staffsAction.setStaff(response.data))
+  };
+  const fetchDepartment = async () => {
+    const response = await axios
+      .get("https://rjs101xbackend.herokuapp.com/departments")
+      .catch((err) => {
+        console.log("Error", err);
+      });
+    dispatch(departmentAction.setDepartment(response.data))
+  };
+  useEffect(() =>{
+    fetchDepartment();
+  },[])
+  useEffect(()=>{
+    fetchStaffs();
+    dispatch(onCheckAddAction.susccessAdd(false));
+  }, [checkAddStaff, dispatch])
   return (
     <BrowserRouter>
-      {showModal && <FormAdd onClose={hideModalFormAdd}/>}
+      {showModal && <FormAdd onClose={hideModalFormAdd} />}
       <Header />
       <Breadcrum infoStaff={infoStaff} />
       <Switch>
@@ -48,14 +77,17 @@ function App() {
         </Route>
 
         <Route path="/notFoundStaff">
-          <NotFoundStaff/>
+          <NotFoundStaff />
         </Route>
 
         <Route path={`/payrollList`}>
           <Payroll />
         </Route>
-        <Route path={`/departmentList`}>
+        <Route path={`/departmentList`} exact>
           <Department />
+        </Route>
+        <Route path={`/departmentList/:depId`}>
+          <StaffDepartment/>
         </Route>
         <Route path={`/listSearch`}>
           <ListSearch />
