@@ -4,25 +4,22 @@ import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import classes from "./StaffDetail.module.css";
 import dateFormat from "dateformat";
 import { NavLink, useParams } from "react-router-dom";
-import axios from "axios";
-import { staffsAction } from "../../redux/reducer/staffReducer";
-import { useCallback, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 fontawesome.library.add(faArrowRightFromBracket);
 const StaffDetail = (props) => {
-  const dispatch = useDispatch();
-  const staffs = useSelector((state) => state.staffs.staffs);
   const departments = useSelector((state) => state.department.departments)
+  const staffs = useSelector((state) => state.staffs.staffs);
   console.log(staffs);
   const params = useParams();
   const idStaff = +params.staffId;
-  let infoStaff = staffs.find((staff) => staff.id === idStaff);
+  const infoStaff = staffs.find((staff) => staff.id === idStaff);
+  console.log(infoStaff);
   let departmentName;
   let loading = true;
-  if(staffs.length > 0){
+  if(staffs.length > 0 && departments.length > 0){
     loading = false;
-    departmentName = departments.find((department) => department.id === infoStaff.departmentId);
+    departmentName = departments.find((department) => department.id === infoStaff.departmentId).name;
   }
   return (
     <div className="p-5">
@@ -50,7 +47,7 @@ const StaffDetail = (props) => {
                 Ngày vào công ty:{" "}
                 {dateFormat(infoStaff.startDate, "dd/mm/yyyy")}
               </p>
-              <p>Phòng ban: {departmentName.name}</p>
+              <p>Phòng ban: {departmentName}</p>
               <p>
                 Số ngày nghĩ còn lại:{" "}
                 <span style={{ color: "#EF3A3A" }}>

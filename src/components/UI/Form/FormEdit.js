@@ -15,7 +15,7 @@ import {
   addNewStaffAction,
 } from "../../../store/index";
 
-const FormAdd = (props) => {
+const FormEdit = (props) => {
 
   const dispatch = useDispatch();
   const errorMessageName = useSelector(
@@ -90,37 +90,6 @@ const FormAdd = (props) => {
       valueOvertime.trim() !== ""
     ) {
       console.log(1);
-      const newStaff = {
-        id: Math.random(),
-        name: valueName,
-        doB: valueDate,
-        salaryScale: valueSalary,
-        startDate: valueDateStart,
-        departmentId: valueDepartment,
-        annualLeave: valueLeave,
-        overTime: valueOvertime,
-        salary: valueSalary * 300000 + valueOvertime * 2000000,
-        image: "/assets/images/alberto.png",
-      };
-      const sendRequest = async () => {
-        await axios.post(
-          "https://rjs101xbackend.herokuapp.com/staffs",
-          newStaff
-        );
-        dispatch(onCheckAddAction.susccessAdd(true));
-        props.onClose();
-      };
-      const sendRequestSalary = async () =>{
-        await axios.post(
-          "https://rjs101xbackend.herokuapp.com/staffsSalary",
-          newStaff
-        );
-      }
-      sendRequest();
-      sendRequestSalary();
-      dispatch(addNewStaffAction.addNewStaff(newStaff));
-      event.target.reset();
-
     } else {
       if (valueName.trim() === "") {
         dispatch(inputNameAction.isValidName(""));
@@ -349,7 +318,7 @@ const FormAdd = (props) => {
             </button>
 
             <button className="btn btn-primary col-6" type="submit">
-              Thêm
+              Thay đổi
             </button>
           </div>
         </form>
@@ -358,4 +327,4 @@ const FormAdd = (props) => {
   );
 };
 
-export default FormAdd;
+export default FormEdit;

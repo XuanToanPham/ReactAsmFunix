@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const intialAddDepartment = {
     departments : [],
     staffDepartment: [], 
+    salary: [],
 }
 
 export const department = createSlice({
@@ -14,6 +15,9 @@ export const department = createSlice({
         },
         getStaffDepartment(state, {type,payload}){
             state.staffDepartment = payload
+        },
+        getSalary(state, {type, payload}){
+            state.salary = payload
         }
     }
 })

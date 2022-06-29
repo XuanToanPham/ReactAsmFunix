@@ -4,6 +4,7 @@ import StaffList from "../Staff/StaffList";
 import { departmentAction } from "../../redux/reducer/departmentReducers";
 import axios from "axios";
 import { useEffect } from "react";
+import Container from "react-bootstrap/esm/Container";
 
 const StaffDepartment = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,11 @@ const StaffDepartment = () => {
       </ul>
     );
   }
-  return content;
+  return(
+    <Container className="pt-5 pb-5">
+      {content}
+    </Container>
+  ) 
 };
 
 export default StaffDepartment;

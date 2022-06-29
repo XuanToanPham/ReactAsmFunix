@@ -1,11 +1,13 @@
 import Container from "react-bootstrap/esm/Container"
-import { STAFFS } from "../Data/staffs"
+import { useSelector } from "react-redux"
 import PayrollList from "./PayrollList"
 const Payroll = () => {
+    const salarys =  useSelector((state) => state.department.salary);
+    console.log(salarys);
     return(
         <Container>
             <ul className="row">
-                {STAFFS.map(staff => (
+                {salarys.map(staff => (
                     <PayrollList key={staff.id} staff = {staff}/>
                 ))}
             </ul>

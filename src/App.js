@@ -14,14 +14,14 @@ import ListSearch from "./components/UI/Search/ListSearch";
 import FormAdd from "./components/UI/Form/FormAdd";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { staffsAction,  } from "./redux/reducer/staffReducer";
-import { departmentAction  } from "./redux/reducer/departmentReducers";
+import { staffsAction } from "./redux/reducer/staffReducer";
+import { departmentAction } from "./redux/reducer/departmentReducers";
 
 import { onCheckAddAction } from "./redux/reducer/staffReducer";
-import StaffDepartment from "./components/Department/StaffsDepartment"
+import StaffDepartment from "./components/Department/StaffsDepartment";
 function App() {
   let checkAddStaff = false;
-  const checkAdd = useSelector((state) => state.onCheckAdd.checkAdd)
+  const checkAdd = useSelector((state) => state.onCheckAdd.checkAdd);
   checkAddStaff = checkAdd;
   console.log(checkAddStaff);
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ function App() {
       .catch((err) => {
         console.log("Error", err);
       });
-    dispatch(staffsAction.setStaff(response.data))
+    dispatch(staffsAction.setStaff(response.data));
   };
   const fetchDepartment = async () => {
     const response = await axios
@@ -51,15 +51,22 @@ function App() {
       .catch((err) => {
         console.log("Error", err);
       });
-    dispatch(departmentAction.setDepartment(response.data))
+    dispatch(departmentAction.setDepartment(response.data));
   };
-  useEffect(() =>{
-    fetchDepartment();
-  },[])
-  useEffect(()=>{
+  const fetchSalary = async () => {
+    const response = await axios
+      .get("https://rjs101xbackend.herokuapp.com/staffsSalary")
+      .catch((err) => {
+        console.log("Error", err);
+      });
+    dispatch(departmentAction.getSalary(response.data));
+  };
+  useEffect(() => {
     fetchStaffs();
+    fetchSalary();
+    fetchDepartment();
     dispatch(onCheckAddAction.susccessAdd(false));
-  }, [checkAddStaff, dispatch])
+  }, [checkAddStaff, dispatch]);
   return (
     <BrowserRouter>
       {showModal && <FormAdd onClose={hideModalFormAdd} />}
@@ -87,7 +94,7 @@ function App() {
           <Department />
         </Route>
         <Route path={`/departmentList/:depId`}>
-          <StaffDepartment/>
+          <StaffDepartment />
         </Route>
         <Route path={`/listSearch`}>
           <ListSearch />
