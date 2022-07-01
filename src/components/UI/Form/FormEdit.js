@@ -4,7 +4,7 @@ import classes from "./FormAdd.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {onCheckAddAction}from "../../../redux/reducer/staffReducer"
 import axios from "axios";
-
+import { loadingAction } from "../../../redux/reducer/notifyReduces";
 import {formEditAction} from "../../../store/index"
 import {
   inputNameAction,
@@ -105,15 +105,18 @@ const FormEdit = (props) => {
         image: "/assets/images/alberto.png",
       };
       const sendRequest = async () => {
+        dispatch(loadingAction.loading);
         await axios.patch(
           `https://rjs101xbackend.herokuapp.com/staffs`,
           editStaff
         );
+        dispatch(loadingAction.finishLoading);
         dispatch(onCheckAddAction.susccessAdd(true));
         dispatch(formEditAction.hideFormEdit());
+
       };
       sendRequest();
-      event.target.reset();
+      
 
     } else {
       if (valueName.trim() === "") {

@@ -12,11 +12,6 @@ fontawesome.library.add(faPlus);
 const Staff = (props) => {
   const staffs = useSelector((state) => state.staffs.staffs)
   const dispatch = useDispatch();
-  const [infoStaff, setInfoStaff] = useState(null);
-  const clickHandler = (id) => {
-    const staffInfo = STAFFS.find((staff) => staff.id === id);
-    setInfoStaff(staffInfo);
-  };
   return (
     <Fragment>
       <Container className="mt-2">
@@ -32,15 +27,9 @@ const Staff = (props) => {
               staff={staff}
               imageStaff={staff.image}
               key={staff.id}
-              onClick={clickHandler}
             />
           ))}
         </ul>
-        {!infoStaff && (
-          <p className="fs-5 fw-bold">
-            Bấm vào tên nhân viên để hiện thông tin
-          </p>
-        )}
       </Container>
     </Fragment>
   );

@@ -10,6 +10,8 @@ import dateFormat from "dateformat";
 import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { formEditAction } from "../../store/index";
 import { useDispatch, useSelector } from "react-redux";
+import { loadingAction } from "../../redux/reducer/notifyReduces";
+import NotifyLoading from "../UI/Notify/NotifyLoading";
 import {
   inputNameAction,
   inputDateAction,
@@ -22,13 +24,14 @@ import {
 import { notifyAction } from "../../redux/reducer/notifyReduces";
 import { Fragment } from "react";
 fontawesome.library.add(faArrowRightFromBracket, faPen, faUserXmark);
-const StaffDetail = (props) => {
+const StaffDetail = () => {
   const departments = useSelector((state) => state.department.departments);
   const dispatch = useDispatch();
   const staffs = useSelector((state) => state.staffs.staffs);
   const params = useParams();
   const idStaff = +params.staffId;
   const infoStaff = staffs.find((staff) => staff.id === idStaff);
+  const checkLoading = useSelector((state) => state.loading.checkLoading);
   const chekStaffDelete = useSelector(
     (state) => state.notify.checkShowModalNotify
   );
@@ -73,62 +76,59 @@ const StaffDetail = (props) => {
   };
 
   return (
-    <Fragment>
-      <div className="p-5">
-        {loading ? (
-          <div> Loading</div>
-        ) : (
-          <div className={classes["staff-container"]}>
-            <NavLink
-              className={classes["staff-button"]}
-              style={{ color: "#EF3A3A" }}
-              to="/staffList"
-            >
-              <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
-            </NavLink>
-            <div className={`row p-2`}>
-              <img
-                src={require(`.${infoStaff.image}`)}
-                className="col-lg-3 col-12 col-md-4 img-fluid"
-                alt="staff"
-              />
-              <div className="col-lg-9 col-12 col-md-8">
-                <h3>Họ và tên: {infoStaff.name}</h3>
-                <p>Ngày sinh: {dateFormat(infoStaff.doB, "dd/mm/yyyy")}</p>
-                <p>
-                  Ngày vào công ty:{" "}
-                  {dateFormat(infoStaff.startDate, "dd/mm/yyyy")}
-                </p>
-                <p>Phòng ban: {departmentName}</p>
-                <p>
-                  Số ngày nghĩ còn lại:{" "}
-                  <span style={{ color: "#EF3A3A" }}>
-                    {infoStaff.annualLeave}
-                  </span>{" "}
-                </p>
-                <p>
-                  Số ngày đã làm thêm:
-                  <span style={{ color: "#3DA822" }}>{infoStaff.overTime}</span>
-                </p>
-              </div>
-            </div>
-            <div className="row ms-2">
-              <div className="col-6">
-                <button className={`btn btn-primary`} onClick={showFormEdit}>
-                  <FontAwesomeIcon icon="fa-solid fa-pen" /> Thay đổi thông tin
-                </button>
-              </div>
-              <div className="col-6" style={{ direction: "rtl" }}>
-                <button className={`btn btn-danger`} onClick={deleteHandler}>
-                  Xóa nhân viên{" "}
-                  <FontAwesomeIcon icon="fa-solid fa-user-xmark" />
-                </button>
-              </div>
+    <div className="p-5">
+      {loading ? (
+        <NotifyLoading />
+      ) : (
+        <div className={classes["staff-container"]}>
+          <NavLink
+            className={classes["staff-button"]}
+            style={{ color: "#EF3A3A" }}
+            to="/staffList"
+          >
+            <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
+          </NavLink>
+          <div className={`row p-2`}>
+            <img
+              src={require(`.${infoStaff.image}`)}
+              className="col-lg-3 col-12 col-md-4 img-fluid"
+              alt="staff"
+            />
+            <div className="col-lg-9 col-12 col-md-8">
+              <h3>Họ và tên: {infoStaff.name}</h3>
+              <p>Ngày sinh: {dateFormat(infoStaff.doB, "dd/mm/yyyy")}</p>
+              <p>
+                Ngày vào công ty:{" "}
+                {dateFormat(infoStaff.startDate, "dd/mm/yyyy")}
+              </p>
+              <p>Phòng ban: {departmentName}</p>
+              <p>
+                Số ngày nghĩ còn lại:{" "}
+                <span style={{ color: "#EF3A3A" }}>
+                  {infoStaff.annualLeave}
+                </span>{" "}
+              </p>
+              <p>
+                Số ngày đã làm thêm:
+                <span style={{ color: "#3DA822" }}>{infoStaff.overTime}</span>
+              </p>
             </div>
           </div>
-        )}
-      </div>
-    </Fragment>
+          <div className="row ms-2">
+            <div className="col-6">
+              <button className={`btn btn-primary`} onClick={showFormEdit}>
+                <FontAwesomeIcon icon="fa-solid fa-pen" /> Thay đổi thông tin
+              </button>
+            </div>
+            <div className="col-6" style={{ direction: "rtl" }}>
+              <button className={`btn btn-danger`} onClick={deleteHandler}>
+                Xóa nhân viên <FontAwesomeIcon icon="fa-solid fa-user-xmark" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import { staffs } from "../redux/reducer/staffReducer";
 import {checkAddStaff} from "../redux/reducer/staffReducer"
 import {department} from "../redux/reducer/departmentReducers"
 import { notifyReducer } from "../redux/reducer/notifyReduces";
+import { loading } from "../redux/reducer/notifyReduces";
 const intialStoreName = {
   isValidName: true,
   messageErrorName: "",
@@ -242,6 +243,7 @@ const store = configureStore({
     department: department.reducer,
     formEdit: formEdit.reducer,
     notify: notifyReducer.reducer,
+    loading: loading.reducer,
   },
 });
 export const formEditAction = formEdit.actions;

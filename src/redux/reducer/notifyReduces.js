@@ -4,6 +4,7 @@ const initialNotify ={
     checkShowModalNotify : false,
     nameStaffDelete: "",
     idStaffDelete: "",
+    checkDelete: false,
 }
 
 
@@ -20,10 +21,28 @@ export const notifyReducer = createSlice({
             state.checkShowModalNotify = false;
             state.nameStaffDelete = "";
             state.idStaffDelete = "";
+        },
+        deleteHandler(state, {type, payload}){
+            state.deleteHandler = payload;
         }
     }
 })
-
+const initialLoading = {
+    checkLoading: false 
+}
+export const loading = createSlice({
+    name: "loading",
+    initialState: initialLoading,
+    reducers:{
+        loading(state){
+            state.checkLoading = true
+        },
+        finishLoading(state){
+            state.checkLoading = false
+        }
+    }
+})
+export const loadingAction = loading.actions;
 export const notifyAction = notifyReducer.actions;
 
 

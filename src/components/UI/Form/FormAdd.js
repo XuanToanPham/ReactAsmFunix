@@ -3,7 +3,7 @@ import Container from "react-bootstrap/esm/Container";
 import classes from "./FormAdd.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {onCheckAddAction}from "../../../redux/reducer/staffReducer"
-
+import { loadingAction } from "../../../redux/reducer/notifyReduces";
 import axios from "axios";
 import {
   inputNameAction,
@@ -104,11 +104,13 @@ const FormAdd = (props) => {
         image: "/assets/images/alberto.png",
       };
       const sendRequest = async () => {
+        dispatch(loadingAction.loading());
         await axios.post(
           "https://rjs101xbackend.herokuapp.com/staffs",
           newStaff
         );
         dispatch(onCheckAddAction.susccessAdd(true));
+        dispatch(loadingAction.finishLoading());
         props.onClose();
       };
       const sendRequestSalary = async () =>{
@@ -119,7 +121,6 @@ const FormAdd = (props) => {
       }
       sendRequest();
       sendRequestSalary();
-      dispatch(addNewStaffAction.addNewStaff(newStaff));
       event.target.reset();
 
     } else {
