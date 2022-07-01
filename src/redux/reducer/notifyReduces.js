@@ -2,7 +2,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialNotify ={
     checkShowModalNotify : false,
-    nameStaffDelete: ""
+    nameStaffDelete: "",
+    idStaffDelete: "",
 }
 
 
@@ -12,7 +13,13 @@ export const notifyReducer = createSlice({
     reducers : {
         ShownotifyDelete (state,{type, payload}){
             state.checkShowModalNotify = true;
-            state.nameStaffDelete = payload;
+            state.nameStaffDelete = payload.name;
+            state.idStaffDelete = payload.id;
+        },
+        hideNotiFyDelete(state){
+            state.checkShowModalNotify = false;
+            state.nameStaffDelete = "";
+            state.idStaffDelete = "";
         }
     }
 })

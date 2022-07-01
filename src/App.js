@@ -25,9 +25,9 @@ function App() {
   const checkAdd = useSelector((state) => state.onCheckAdd.checkAdd);
   const checkFormEdit = useSelector((state) => state.formEdit.checkShowFormEdit);
   const checkNotify = useSelector((state) => state.notify.checkShowModalNotify);
-  console.log(checkFormEdit);
+  const chekStaffDelete = useSelector((state) => state.notify.checkShowModalNotify);
   checkAddStaff = checkAdd;
-  console.log(checkAddStaff);
+
   const dispatch = useDispatch();
   const [infoStaff, setInfoStaff] = useState("");
   const getInfoStaff = (infoStaff) => {
@@ -70,7 +70,7 @@ function App() {
     fetchSalary();
     fetchDepartment();
     dispatch(onCheckAddAction.susccessAdd(false));
-  }, [checkAddStaff, dispatch]);
+  }, [checkAddStaff, dispatch, chekStaffDelete]);
   return (
     <BrowserRouter>
       {checkNotify && <NotifyDelete/>}

@@ -1,5 +1,4 @@
 import classes from "./StaffList.module.css";
-
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 const StaffList = (props) => {
