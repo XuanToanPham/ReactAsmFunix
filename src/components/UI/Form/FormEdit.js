@@ -4,6 +4,8 @@ import classes from "./FormAdd.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {onCheckAddAction}from "../../../redux/reducer/staffReducer"
 import axios from "axios";
+
+import {formEditAction} from "../../../store/index"
 import {
   inputNameAction,
   inputDateAction,
@@ -12,11 +14,11 @@ import {
   inputSalaryAction,
   inputLeaveAction,
   inputOvertimeAction,
-  addNewStaffAction,
 } from "../../../store/index";
 
 const FormEdit = (props) => {
-
+  const getIdEdit = useSelector((state) =>state.formEdit.idEdit);
+  console.log(getIdEdit);
   const dispatch = useDispatch();
   const errorMessageName = useSelector(
     (state) => state.inputName.messageErrorName
@@ -77,19 +79,42 @@ const FormEdit = (props) => {
   const valueOvertime = useSelector(
     (state) => state.inputOvertime.valueOvertime
   );
-
   const submitedHandler = (event) => {
     event.preventDefault();
+   
     if (
       valueName.trim() !== "" &&
       valueDate.trim() !== "" &&
       valueDateStart.trim() !== "" &&
       valueDepartment.trim() !== "" &&
-      valueSalary.trim() !== "" &&
-      valueLeave.trim() !== "" &&
-      valueOvertime.trim() !== ""
+      toString(valueSalary).trim() !== "" &&
+      toString(valueLeave).trim() !== "" &&
+      toString(valueOvertime).trim() !== ""
     ) {
       console.log(1);
+      const editStaff = {
+        id: getIdEdit,
+        name: valueName,
+        doB: valueDate,
+        salaryScale: +valueSalary,
+        startDate: valueDateStart,
+        departmentId: valueDepartment,
+        annualLeave: +valueLeave,
+        overTime: +valueOvertime,
+        salary: valueSalary * 300000 + valueOvertime * 2000000,
+        image: "/assets/images/alberto.png",
+      };
+      const sendRequest = async () => {
+        await axios.patch(
+          `https://rjs101xbackend.herokuapp.com/staffs`,
+          editStaff
+        );
+        dispatch(onCheckAddAction.susccessAdd(true));
+        dispatch(formEditAction.hideFormEdit());
+      };
+      sendRequest();
+      event.target.reset();
+
     } else {
       if (valueName.trim() === "") {
         dispatch(inputNameAction.isValidName(""));
@@ -119,7 +144,7 @@ const FormEdit = (props) => {
     <Modal onClose={props.onClose}>
       <Container>
         <form onSubmit={submitedHandler}>
-          <legend>Thêm nhân viên</legend>
+          <legend>Cập nhật thông tin</legend>
           <div className="mb-2 row">
             <label className="col-3" htmlFor="">
               Tên
@@ -131,7 +156,7 @@ const FormEdit = (props) => {
                   !isValidName ? classes.invalid : ""
                 } `}
                 id="name-input"
-                
+                value={valueName}
                 onChange={(event) => {
                   dispatch(inputNameAction.isValidName(event.target.value));
                 }}
@@ -155,7 +180,7 @@ const FormEdit = (props) => {
                   !isValidDate ? classes.invalid : ""
                 } `}
                 id="date-birth-input"
-                
+                value={valueDate}
                 onChange={(event) => {
                   dispatch(inputDateAction.isValidDate(event.target.value));
                 }}
@@ -179,6 +204,7 @@ const FormEdit = (props) => {
                   !isValidDateStart ? classes.invalid : ""
                 } `}
                 id="date-start-input"
+                value={valueDateStart}
                 onChange={(event) => {
                   dispatch(
                     inputDateStartAction.isValidDateStart(event.target.value)
@@ -210,6 +236,7 @@ const FormEdit = (props) => {
                     inputDepartmentAction.isValidDepartment(event.target.value)
                   );
                 }}
+                value={valueDepartment}
                 onBlur={(event) => {
                   dispatch(
                     inputDepartmentAction.isValidDepartment(event.target.value)
@@ -239,9 +266,12 @@ const FormEdit = (props) => {
                   !isValidSalary ? classes.invalid : ""
                 } `}
                 id="salaryScale-input"
-                min={`0`}
-                max={`3.0`}
+                value={valueSalary}
+                min={1}
+                max={3}
                 placeholder="1.0 -> 3.0"
+                pattern="[+-]?\d+(?:[.,]\d+)?"
+                step={0.1}
                 onChange={(event) => {
                   dispatch(inputSalaryAction.isValidSalary(event.target.value));
                 }}
@@ -264,6 +294,7 @@ const FormEdit = (props) => {
                 className={`form-control ${
                   !isValidLeave ? classes.invalid : ""
                 } `}
+                value={valueLeave}
                 id="annualLeave-input"
                 min={`0`}
                 placeholder="1.0"
@@ -289,6 +320,7 @@ const FormEdit = (props) => {
                 className={`form-control ${
                   !isValidOvertime ? classes.invalid : ""
                 } `}
+                value={valueOvertime}
                 id="overtime-input"
                 min={`1.0`}
                 placeholder="1.0"
@@ -318,7 +350,7 @@ const FormEdit = (props) => {
             </button>
 
             <button className="btn btn-primary col-6" type="submit">
-              Thay đổi
+              Cập nhật
             </button>
           </div>
         </form>

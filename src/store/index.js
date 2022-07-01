@@ -3,6 +3,7 @@ import {STAFFS} from "../components/Data/staffs"
 import { staffs } from "../redux/reducer/staffReducer";
 import {checkAddStaff} from "../redux/reducer/staffReducer"
 import {department} from "../redux/reducer/departmentReducers"
+import { notifyReducer } from "../redux/reducer/notifyReduces";
 const intialStoreName = {
   isValidName: true,
   messageErrorName: "",
@@ -25,6 +26,9 @@ const validateNameInput = createSlice({
       }
       state.valueName = action.payload;
     },
+    updateData (state, {type ,payload}){
+      state.valueName = payload;
+    }
   },
 });
 
@@ -48,6 +52,9 @@ const validateDateInput = createSlice({
       }
       state.valueDate = action.payload;
     },
+    updateData (state, {type ,payload}){
+      state.valueDate = payload;
+    }
   },
 });
 
@@ -71,6 +78,9 @@ const validateDateStartInput = createSlice({
       }
       state.valueDateStart = action.payload;
     },
+    updateData (state, {type ,payload}){
+      state.valueDateStart = payload;
+    }
   },
 });
 
@@ -94,6 +104,9 @@ const validateDepartmentInput = createSlice({
       }
       state.valueDepartment = action.payload;
     },
+    updateData (state, {type ,payload}){
+      state.valueDepartment = payload;
+    }
   },
 });
 
@@ -120,6 +133,9 @@ const validateSalaryInput = createSlice({
       }
       state.valueSalary = action.payload;
     },
+    updateData (state, {type ,payload}){
+      state.valueSalary = payload;
+    }
   },
 });
 
@@ -143,6 +159,9 @@ const validateLeaveInput = createSlice({
       }
       state.valueLeave = action.payload;
     },
+    updateData (state, {type ,payload}){
+      state.valueLeave = payload;
+    }
   },
 });
 
@@ -166,6 +185,9 @@ const validateOvertimeInput = createSlice({
       }
       state.valueOvertime = action.payload;
     },
+    updateData (state, {type ,payload}){
+      state.valueOvertime = payload;
+    }
   },
 });
 
@@ -184,6 +206,27 @@ const addNewStaff = createSlice({
     }
 })
 
+const intialFormEdit  = {
+  checkShowFormEdit : false,
+  idEdit: "",
+}
+
+const formEdit = createSlice({
+  name: "form edit",
+  initialState: intialFormEdit,
+  reducers:{
+    getIdEdit(state, {type, payload}){
+      state.idEdit = payload;
+    },
+    showFormEdit(state){
+      state.checkShowFormEdit = true;
+    },
+    hideFormEdit(state){
+      state.checkShowFormEdit = false;
+    }
+  }
+})
+
 const store = configureStore({
   reducer: {
     inputName: validateNameInput.reducer,
@@ -197,8 +240,11 @@ const store = configureStore({
     staffs: staffs.reducer,
     onCheckAdd : checkAddStaff.reducer,
     department: department.reducer,
+    formEdit: formEdit.reducer,
+    notify: notifyReducer.reducer,
   },
 });
+export const formEditAction = formEdit.actions;
 export const inputNameAction = validateNameInput.actions;
 export const inputDateAction = validateDateInput.actions;
 export const inputDateStartAction = validateDateStartInput.actions;

@@ -16,12 +16,16 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { staffsAction } from "./redux/reducer/staffReducer";
 import { departmentAction } from "./redux/reducer/departmentReducers";
-
 import { onCheckAddAction } from "./redux/reducer/staffReducer";
 import StaffDepartment from "./components/Department/StaffsDepartment";
+import FormEdit from "./components/UI/Form/FormEdit";
+import NotifyDelete from "./components/UI/Notify/NotifyDelete";
 function App() {
   let checkAddStaff = false;
   const checkAdd = useSelector((state) => state.onCheckAdd.checkAdd);
+  const checkFormEdit = useSelector((state) => state.formEdit.checkShowFormEdit);
+  const checkNotify = useSelector((state) => state.notify.checkShowModalNotify);
+  console.log(checkFormEdit);
   checkAddStaff = checkAdd;
   console.log(checkAddStaff);
   const dispatch = useDispatch();
@@ -69,7 +73,10 @@ function App() {
   }, [checkAddStaff, dispatch]);
   return (
     <BrowserRouter>
+      {checkNotify && <NotifyDelete/>}
+      
       {showModal && <FormAdd onClose={hideModalFormAdd} />}
+      {checkFormEdit && <FormEdit/>}
       <Header />
       <Breadcrum infoStaff={infoStaff} />
       <Switch>

@@ -3,6 +3,7 @@ import Container from "react-bootstrap/esm/Container";
 import classes from "./FormAdd.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {onCheckAddAction}from "../../../redux/reducer/staffReducer"
+
 import axios from "axios";
 import {
   inputNameAction,
@@ -146,6 +147,7 @@ const FormAdd = (props) => {
       console.log(2);
     }
   };
+
   return (
     <Modal onClose={props.onClose}>
       <Container>
@@ -270,9 +272,11 @@ const FormAdd = (props) => {
                   !isValidSalary ? classes.invalid : ""
                 } `}
                 id="salaryScale-input"
-                min={`0`}
-                max={`3.0`}
+                min={1}
+                max={3.0}
                 placeholder="1.0 -> 3.0"
+                pattern="[+-]?\d+(?:[.,]\d+)?"
+                step={0.1}
                 onChange={(event) => {
                   dispatch(inputSalaryAction.isValidSalary(event.target.value));
                 }}
