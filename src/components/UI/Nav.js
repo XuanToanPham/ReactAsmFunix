@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useHistory } from "react-router-dom";
 import classes from "./Nav.module.css";
-import { useRef} from "react";
+import { useRef } from "react";
 import { STAFFS } from "../Data/staffs";
 fontawesome.library.add(faUser);
 const Nav = () => {
@@ -14,8 +14,10 @@ const Nav = () => {
     const data = inputSearch.current.value;
     let infoStaff;
     if (data !== "") {
-      infoStaff = STAFFS.filter((staff) => staff.name.toLowerCase().includes(data.toLowerCase()));
-      console.log(infoStaff)
+      infoStaff = STAFFS.filter((staff) =>
+        staff.name.toLowerCase().includes(data.toLowerCase())
+      );
+      console.log(infoStaff);
       if (infoStaff.length > 1) {
         history.push({
           pathname: "/listSearch",
@@ -35,6 +37,11 @@ const Nav = () => {
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid d-block">
         <nav className="navbar">
+          <NavLink className="navbar-brand" to="/staffList">
+            <span className={`${classes["header-content"]} col-4`}>
+              {<FontAwesomeIcon icon="fa-solid fa-user" />}
+            </span>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -47,11 +54,6 @@ const Nav = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <NavLink className="navbar-brand" to="/staffList">
-              <span className={`${classes["header-content"]} col-4`}>
-                {<FontAwesomeIcon icon="fa-solid fa-user" />}
-              </span>
-            </NavLink>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <NavLink

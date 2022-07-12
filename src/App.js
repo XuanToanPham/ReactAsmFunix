@@ -16,9 +16,10 @@ import Breadcrum from "./components/Breadcrumb/Breadcrum";
 import { useState } from "react";
 import NotFoundStaff from "./components/UI/NotFoundStaff";
 import ListSearch from "./components/UI/ListSearch";
+
+import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 function App() {
   const [infoStaff, setInfoStaff] = useState("");
-  const [listStaffSearch, setListStaffSearch ] = useState([]);
   const getInfoStaff = (infoStaff) => {
     setInfoStaff(infoStaff);
   };
