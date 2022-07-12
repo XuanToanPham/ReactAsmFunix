@@ -5,6 +5,7 @@ import {checkAddStaff} from "../redux/reducer/staffReducer"
 import {department} from "../redux/reducer/departmentReducers"
 import { notifyReducer } from "../redux/reducer/notifyReduces";
 import { loading } from "../redux/reducer/notifyReduces";
+import logger from "redux-logger"
 const intialStoreName = {
   isValidName: true,
   messageErrorName: "",
@@ -245,6 +246,7 @@ const store = configureStore({
     notify: notifyReducer.reducer,
     loading: loading.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 export const formEditAction = formEdit.actions;
 export const inputNameAction = validateNameInput.actions;
