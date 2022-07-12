@@ -8,8 +8,7 @@ import { useRef, useState } from "react";
 import {useSelector} from "react-redux"
 fontawesome.library.add(faUser, faList);
 const Nav = () => {
-  const listStaff = useSelector((state) => state.addNewStaff.newStaff);
-
+  const listStaff = useSelector((state) => state.staffs.staffs)
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
