@@ -22,8 +22,8 @@ import FormEdit from "./components/UI/Form/FormEdit";
 import NotifyDelete from "./components/UI/Notify/NotifyDelete";
 import NotifyLoading from "./components/UI/Notify/NotifyLoading";
 import { loadingAction, notifyAction } from "./redux/reducer/notifyReduces";
+import {formEditAction} from "./store/index"
 function App() {
-  
   let checkAddStaff = false;
   const checkAdd = useSelector((state) => state.onCheckAdd.checkAdd);
   const checkFormEdit = useSelector(
@@ -48,6 +48,7 @@ function App() {
   };
 
   const hideModalFormAdd = () => {
+    dispatch(formEditAction.hideFormEdit());
     setShowModal(false);
   };
   const fetchStaffs = async () => {

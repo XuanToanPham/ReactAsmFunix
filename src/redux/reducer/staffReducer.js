@@ -27,5 +27,19 @@ export const checkAddStaff = createSlice({
     }
   }
 })
+
+const intialEditStaff = {
+  checkEdit : false
+}
+export const checkEditStaff = createSlice({
+  name: "check edit",
+  initialState: intialEditStaff,
+  reducers: {
+    susccessEdit(state, {payload}){
+      state.checkEdit = payload;
+    }
+  }
+})
 export const onCheckAddAction = checkAddStaff.actions;
 export const staffsAction = staffs.actions;
+export const onCheckEdit = checkEditStaff.actions;

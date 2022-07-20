@@ -6,6 +6,7 @@ import {onCheckAddAction}from "../../../redux/reducer/staffReducer"
 import axios from "axios";
 import { loadingAction } from "../../../redux/reducer/notifyReduces";
 import {formEditAction} from "../../../store/index"
+import {onCheckEdit} from "../../../redux/reducer/staffReducer"
 import {
   inputNameAction,
   inputDateAction,
@@ -23,6 +24,9 @@ const FormEdit = (props) => {
   const errorMessageName = useSelector(
     (state) => state.inputName.messageErrorName
   );
+  const onCloseEdit = () =>{
+    dispatch(formEditAction.hideFormEdit())
+  }
   let isValidName = useSelector((state) => state.inputName.isValidName);
   const valueName = useSelector((state) => state.inputName.valueName);
 
@@ -347,7 +351,7 @@ const FormEdit = (props) => {
             <button
               className="btn btn-danger col-6"
               type="button"
-              onClick={props.onClose}
+              onClick={onCloseEdit}
             >
               Thoát
             </button>

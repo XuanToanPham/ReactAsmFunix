@@ -1,7 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import {STAFFS} from "../components/Data/staffs"
 import { staffs } from "../redux/reducer/staffReducer";
-import {checkAddStaff} from "../redux/reducer/staffReducer"
+import {checkAddStaff, checkEditStaff} from "../redux/reducer/staffReducer"
 import {department} from "../redux/reducer/departmentReducers"
 import { notifyReducer } from "../redux/reducer/notifyReduces";
 import { loading } from "../redux/reducer/notifyReduces";
@@ -245,6 +245,7 @@ const store = configureStore({
     formEdit: formEdit.reducer,
     notify: notifyReducer.reducer,
     loading: loading.reducer,
+    onCheckEdit : checkEditStaff.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
