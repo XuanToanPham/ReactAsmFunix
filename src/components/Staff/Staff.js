@@ -7,27 +7,24 @@ import { STAFFS } from "../Data/staffs";
 import { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { staffsAction } from "../../redux/reducer/staffReducer";
+import { motion } from "framer-motion";
 import axios from "axios";
 fontawesome.library.add(faPlus);
 const Staff = (props) => {
-  const staffs = useSelector((state) => state.staffs.staffs)
+  const staffs = useSelector((state) => state.staffs.staffs);
   const dispatch = useDispatch();
   return (
     <Fragment>
       <Container className="mt-2">
         <div className="d-flex justify-content-between">
           <h2 className="fw-bold">Danh sách nhân sự</h2>
-          <button onClick={props.onShow} className="btn btn-primary">
+          <motion.button whileHover={{scale: 1.1}} onClick={props.onShow} className="btn btn-primary">
             <FontAwesomeIcon icon="fa-solid fa-plus" />
-          </button>
+          </motion.button>
         </div>
         <ul className="row p-0">
           {staffs.map((staff) => (
-            <StaffList
-              staff={staff}
-              imageStaff={staff.image}
-              key={staff.id}
-            />
+            <StaffList staff={staff} imageStaff={staff.image} key={staff.id} />
           ))}
         </ul>
       </Container>

@@ -23,6 +23,8 @@ import NotifyDelete from "./components/UI/Notify/NotifyDelete";
 import NotifyLoading from "./components/UI/Notify/NotifyLoading";
 import { loadingAction, notifyAction } from "./redux/reducer/notifyReduces";
 import {formEditAction} from "./store/index"
+import { motion, AnimatePresence } from "framer-motion";
+
 function App() {
   let checkAddStaff = false;
   const checkAdd = useSelector((state) => state.onCheckAdd.checkAdd);
